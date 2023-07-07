@@ -4,7 +4,7 @@ Code for training and evaluation the transformer-based robust Table QA models in
 
 <div align="center">    
  
-### An <u>I</u>nner <u>T</u>able <u>R</u>etriever for robust table question answering
+### An <u>I</u>nner <u>T</u>able <u>R</u>etriever for Robust Table Question Answering
 
 [![Paper](https://img.shields.io/badge/Paper-ACL_Proceedings-red)](https://www.amazon.science/publications/an-inner-table-retriever-for-robust-table-question-answering)
 [![Conference](https://img.shields.io/badge/Conference-ACL--2023-blue)](https://2023.aclweb.org/)
@@ -34,7 +34,7 @@ For more info and details on how to install/run check [COMING SOON]().
 
 <div align="center">
  
-### LI-RAGE: <u>L</u>ate <u>I</u>nteraction <u>R</u>etrieval <u>A</u>ugmented <u>G</u>eneration with <u>E</u>xplicit signals for open-domain table question answering
+### LI-RAGE: <u>L</u>ate <u>I</u>nteraction <u>R</u>etrieval <u>A</u>ugmented <u>G</u>eneration with <u>E</u>xplicit signals for Open-Domain Table Question Answering
 
 [![Paper](https://img.shields.io/badge/Paper-Amazon_Science-orange)](https://www.amazon.science/publications/li-rage-late-interaction-retrieval-augmented-generation-with-explicit-signals-for-open-domain-table-question-answering)
 [![Conference](https://img.shields.io/badge/Conference-ACL_2023-red)](https://2023.aclweb.org/)
