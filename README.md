@@ -545,6 +545,17 @@ E2E_WTQ test
 python src/main.py configs/e2e_wtq/rag.jsonnet --accelerator gpu --devices 1 --strategy ddp --experiment_name RAG_E2EWTQ_RAVQA_Approach5_add_prompt --mode test --test_evaluation_name K5 --modules add_binary_labels_as_prompt --opts test.batch_size=1 test.load_epoch=126 model_config.num_beams=5 data_loader.additional.num_knowledge_passages=5
 ```
 
+## Miscellaneous  
+
+### Difference w.r.t. the official ColBERT repository
+We have made several changes to the ColBERT codebase so that it can be run and integrated into our framework.
+- The original code uses `total_visible_gpus` to determine if we are to use gpus. However, in dynamic retrieval, we'd like to use cpu for retrieval only, while keeping gpus visible to our main training framework. Therefore, we modified `colbert/indexing/codecs/residual.py` to add an argument `disable_gpu`. Similarly, `self.use_gpu` is added to `colbert/search/index_loader.py`. `colbert/searcher.py` reads `initial_config.total_visible_gpus = config.total_visible_gpus` from the pass-in config.
+- `colbert/indexing/collection_indexer.py`: we commented out `self.config.help()` which generates redundant information flooding the terminal.
+- `colbert/modeling/colbert.py`: its original negative samples are only shared across batches in one device. We added support for sharing negative samples in all batches across all GPUs. We also re-wrote the original in-batch negative sampling loss with a cleaner version.
+- `colbert/modeling/tokenization/doc_tokenization.py`: the padding strategy is changed from `longest` to `max_length`. This is because our tables are typically long, and we set `max_length=512`.
+- Other issues that blocked running
+  - `colbert/search/index_storage.py`: `approx_scores = torch.cat(approx_scores, dim=0).float()`
+  - `colbert/search/strided_tensor.py`: `pids = pids.cpu()` is necessary. Move them to GPU afterwards.
 
 
 ## Security
