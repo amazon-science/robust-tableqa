@@ -256,9 +256,9 @@ Some general cli arguments. For more details, please read the code / directly lo
 ## Inner Table Retrieval
 **NOTE** After training, you need to run inference to generate index files that are used in TableQA + ITR. The index files will be generated in `Experiments/{experiment_name}/test/epoch{load_epoch}/`.
 
-### Main Experiments 
+## Main Experiments 
 
-#### ITR mix (intersecting columns and rows)
+### ITR mix (intersecting columns and rows)
 
 WikiSQL train
 ```
@@ -273,9 +273,9 @@ WikiTQ test
 python src/main.py configs/wtq/dpr_ITR_mix_wtq.jsonnet --accelerator gpu --devices 1 --strategy ddp --experiment_name DPR_InnerTableRetrieval_wikisql_with_in_batch_neg_sampling_mixed --mode test --test_evaluation_name wtq_original_sets --opts test.batch_size=32 test.load_epoch=11604
 ```
 
-### Additional ablation experiments 
+## Additional ablation experiments 
 
-##### Column-wise ITR
+### Column-wise ITR
 WikiSQL train
 ```
 python src/main.py configs/dpr_ITR_wikisql.jsonnet --accelerator gpu --devices 8 --strategy ddp --num_sanity_val_steps 2 --experiment_name DPR_InnerTableRetrieval_wikisql_with_in_batch_neg_sampling_single_column --mode train --opts train.batch_size=1 train.scheduler=None train.epochs=20 train.lr=0.00001 train.additional.gradient_accumulation_steps=4 train.additional.warmup_steps=200 train.additional.early_stop_patience=6 train.additional.save_top_k=3 train.save_interval=200 valid.batch_size=8 test.batch_size=8 valid.step_size=200 data_loader.dummy_dataloader=0
@@ -289,7 +289,7 @@ WikiTQ test
 python src/main.py configs/wtq/dpr_ITR_column_wise_wtq.jsonnet --accelerator gpu --devices 1 --strategy ddp --experiment_name DPR_InnerTableRetrieval_wikisql_with_in_batch_neg_sampling_single_column --mode test --test_evaluation_name wtq_original_sets --opts test.batch_size=32 test.load_epoch=3801
 ```
 
-###### Row-wise ITR
+### Row-wise ITR
 WikiSQL train
 ```
 python src/main.py configs/dpr_ITR_row_wise_wikisql.jsonnet --accelerator gpu --devices 8 --strategy ddp --num_sanity_val_steps 2 --experiment_name DPR_InnerTableRetrieval_wikisql_with_in_batch_neg_sampling_single_row --mode train --opts train.batch_size=1 train.scheduler=None train.epochs=20 train.lr=0.00001 train.additional.gradient_accumulation_steps=4 train.additional.warmup_steps=200 train.additional.early_stop_patience=8 train.additional.save_top_k=3 train.save_interval=200 valid.batch_size=8 test.batch_size=8 valid.step_size=200 data_loader.dummy_dataloader=0
@@ -328,9 +328,9 @@ Some general notes:
 - In the paper we provide different variations. Here we only show the main results with the ITR-mix strategy and the ablations with column- or row-wise ITR. Feel free to try your own configuration. You can change `model_config.ModelClass` to `ITRRagReduceMixModel`, `ITRRagAdditionRowWiseModel`, etc. Available model classes are in `models/itr_rag.py` and `models/itr_rag_reduce.py`.
 
 
-### Main Experiments 
+## Main Experiments 
 
-#### ITR mix (intersecting columns and rows)
+### ITR mix (intersecting columns and rows)
 
 WikiSQL train
 ```
@@ -349,9 +349,9 @@ WikiTQ test
 python src/main.py configs/wtq/tapex_ITR_mix_wtq.jsonnet --accelerator gpu --devices 8 --strategy ddp --experiment_name finetune_tapex_large_on_WTQ_with_ITR_mix_reduction_smoothing_overflow_only_original_sub_table_order_K_10 --mode test --modules overflow_only original_sub_table_order --test_evaluation_name original_sets --opts test.batch_size=2 test.load_epoch=[] model_config.GeneratorModelVersion=microsoft/tapex-large-finetuned-wtq model_config.ModelClass=ITRRagReduceMixModel data_loader.additional.num_knowledge_passages=10 data_loader.additional.max_decoder_source_length=1024
 ```
 
-### Additional Ablation Experiments 
+## Additional Ablation Experiments 
 
-##### Column-wise ITR
+### Column-wise ITR
 WikiSQL train
 ```
 python src/main.py configs/tapex_ITR_wikisql.jsonnet --accelerator gpu --devices 8 --strategy ddp --num_sanity_val_steps 2 --experiment_name finetune_tapex_large_on_WikiSQL_with_ITR_addition_smoothing_overflow_only --mode train --modules overflow_only --opts train.batch_size=1 train.scheduler=linear train.epochs=10 train.lr=0.00003 train.additional.gradient_accumulation_steps=4 train.additional.warmup_steps=1000 train.additional.early_stop_patience=5 train.additional.save_top_k=3 valid.step_size=1000 valid.batch_size=4 test.batch_size=4 data_loader.dummy_dataloader=0 model_config.GeneratorModelVersion=microsoft/tapex-large data_loader.additional.num_knowledge_passages=5
@@ -369,8 +369,7 @@ WikiTQ test
 python src/main.py configs/wtq/tapex_ITR_column_wise_wtq.jsonnet --accelerator gpu --devices 8 --strategy ddp --experiment_name finetune_tapex_large_on_WTQ_with_ITR_column_wise_addition_smoothing_overflow_only_original_sub_table_order_K_10 --mode test --modules overflow_only original_sub_table_order --test_evaluation_name ITR_addition_oo_osto_K_10 --opts test.batch_size=2 test.load_epoch=[] model_config.GeneratorModelVersion=microsoft/tapex-large model_config.ModelClass=ITRRagModel data_loader.additional.num_knowledge_passages=10
 ```
 
-
-##### Row-wise ITR
+### Row-wise ITR
 
 WikiSQL train
 ```
@@ -388,7 +387,6 @@ WikiTQ test
 ```
 python src/main.py configs/wtq/tapex_ITR_row_wise_wtq.jsonnet --accelerator gpu --devices 8 --strategy ddp --experiment_name finetune_tapex_large_on_WTQ_with_ITR_row_wise_addition_smoothing_overflow_only_original_sub_table_order_K_10 --mode test --modules overflow_only original_sub_table_order force_select_last --test_evaluation_name ITR_addition_oo_osto_fsl_K_10 --opts test.batch_size=4 test.load_epoch=[] model_config.GeneratorModelVersion=microsoft/tapex-large model_config.ModelClass=ITRRagAdditionRowWiseModel data_loader.additional.num_knowledge_passages=10
 ```
-
 
 
 ## TableQA with ITR (TaPas + ITR)
@@ -483,9 +481,9 @@ E2E_WTQ test
 python src/main.py configs/e2e_wtq/colbert_rag.jsonnet --accelerator gpu --devices 1 --strategy ddp --experiment_name RAG_ColBERT_E2EWTQ_RAVQA_Approach5_add_prompt_pretrained --mode test --test_evaluation_name K5 --modules add_binary_labels_as_prompt --opts test.batch_size=1 test.load_epoch=176 model_config.num_beams=5 data_loader.additional.num_knowledge_passages=5
 ```
 
-### Additional Ablation Experiments 
+## Additional Ablation Experiments 
 
-##### Dense Passage Retrieval (DPR)
+### Dense Passage Retrieval (DPR)
 
 Some useful arguments
 - `--modules negative_samples_across_gpus`: sharing negative samples across GPUs
@@ -520,7 +518,7 @@ python src/main.py configs/e2e_wtq/dpr.jsonnet --accelerator gpu --devices 1 --s
 ```
 
 
-##### DPR + RAGE 
+### DPR + RAGE 
 Some settings:
 - `--modules add_binary_labels_as_prompt`: add binary relevance tokens in training and in testing. Note: must be enabled both in training and testing.
 - `nq_tables/rag.jsonnet`: joint training of retriever and reader; `frozen_rag.jsonnet`: freeze the retriever during training.
