@@ -28,7 +28,7 @@ If you find our paper, code or framework useful, please put a link to this repo 
 }
 ```
 
-For more info and details on how to install/run check [Scripts for Inner Table Retriever](#scripts-for-inner-table-retriever) in the [Experiments](#experiments) Section below. 
+For more info and details on how to install/run check [Scripts for Inner Table Retriever](#scripts-for-inner-table-retriever) in the [Codebase](#codebase) Section below. 
 
 <hr> 
 
@@ -63,11 +63,12 @@ If you find our paper, code or framework useful, please put a link to this repo 
 }
 ```
 
-For more info and details on how to install/run check [Scripts for Open-domain TableQA with Late Interaction Models](#scripts-for-open-domain-tableqa-with-late-interaction-models) in the [Experiments](#experiments) Section below.
+For more info and details on how to install/run check [Scripts for Open-domain TableQA with Late Interaction Models](#scripts-for-open-domain-tableqa-with-late-interaction-models) in the [Codebase](#codebase) Section below.
 
 <hr>
 
-## Experiments
+## Codebase 
+
 - [Codebase Structure](#codebase-structure)
   - [3rd-party Open-Source Tools](#3rd-party-open-source-tools)
   - [Overview](#overview)
